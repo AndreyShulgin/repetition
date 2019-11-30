@@ -4,12 +4,8 @@ public class SqMax {
     public static int max(int first, int second, int third, int forth) {
         int result = forth;
 
-        if (first > second) {
-            if (first > third) {
-                if (first > forth) {
-                    result = first;
-                }
-            }
+        if (third > forth) {
+            result = third;
         }
 
         if (second > third) {
@@ -18,8 +14,12 @@ public class SqMax {
             }
         }
 
-        if (third > forth) {
-            result = third;
+        if (first > second) {
+            if (first > third) {
+                if (first > forth) {
+                    result = first;
+                }
+            }
         }
 
         return result;
