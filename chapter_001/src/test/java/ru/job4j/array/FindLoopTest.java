@@ -8,30 +8,27 @@ public class FindLoopTest {
 
     @Test
     public void whenArrayHas5Then0() {
-        FindLoop find = new FindLoop();
         int[] input = new int[] {5, 10, 3};
         int value = 5;
-        int result = find.indexOf(input, value);
+        int result = FindLoop.indexOf(input, value);
         int expect = 0;
         assertThat(result, is(expect));
     }
 
     @Test
     public void whenArrayHas5Then1() {
-        FindLoop find = new FindLoop();
         int[] input = new int[] {50, 5, 3};
         int value = 5;
-        int result = find.indexOf(input, value);
+        int result = FindLoop.indexOf(input, value);
         int expect = 1;
         assertThat(result, is(expect));
     }
 
     @Test
     public void whenArrayHas5ThenNotFound() {
-        FindLoop find = new FindLoop();
         int[] input = new int[] {15, 10, 3};
         int value = 5;
-        int result = find.indexOf(input, value);
+        int result = FindLoop.indexOf(input, value);
         int expect = -1;
         assertThat(result, is(expect));
     }
