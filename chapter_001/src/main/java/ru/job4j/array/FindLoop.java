@@ -21,4 +21,22 @@ public class FindLoop {
         }
         return rst;
     }
+
+    /**
+     * Метод проверяет есть ли элемент el в массиве date в диапозоне от start до finish
+     * @param data - массив
+     * @param el - элемент для поиска
+     * @param start - начало диапозона
+     * @param finish - конец диапозона
+     * @return - возвращает индекс элемента равного el или -1.
+     */
+    public static int indexOf(int[] data, int el, int start, int finish) {
+        int rst = -1; // если элемента нет в массиве, то возвращаем -1.
+        for (int index = start; index <= finish; index++) {
+            if (data[index] == el) {
+                rst = index;
+            }
+        }
+        return rst;
+    }
 }
