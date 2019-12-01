@@ -13,7 +13,7 @@ public class Matrix {
         int[][] table = new int[size][size];
         for (int out = 0; out < table.length; out++) {
             for (int in = 0; in < table.length; in++) {
-                table [out][in] = (out +1) * (in + 1);
+                table [out][in] = (out + 1) * (in + 1);
             }
         }
         return table;
