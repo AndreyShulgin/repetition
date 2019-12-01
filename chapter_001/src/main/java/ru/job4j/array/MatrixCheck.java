@@ -5,6 +5,11 @@ package ru.job4j.array;
  */
 public class MatrixCheck {
 
+    /**
+     * Метод проверяет есть ли выигрышная комбинация ( 5 Х в ряд по вертикали или горизонтал )
+     * @param board - двумерный массив ( поле размеро 5х5)
+     * @return - true если есть выигрышная комбинация
+     */
     public static boolean isWin(char[][] board) {
         boolean result = false;
         for (int row = 0; row < board.length; row++) {
