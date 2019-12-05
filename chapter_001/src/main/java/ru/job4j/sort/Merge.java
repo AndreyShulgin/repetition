@@ -25,7 +25,6 @@ public class Merge {
                 System.arraycopy(right, indexRight, rsl, indexRsl, right.length - indexRight);
                 break;
             }
-
             if (indexRight == right.length) {
                 System.arraycopy(left, indexLeft, rsl, indexRsl, left.length - indexLeft);
                 break;
