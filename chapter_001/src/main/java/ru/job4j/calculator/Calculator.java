@@ -1,6 +1,7 @@
 package ru.job4j.calculator;
 
-/**Calculator
+/**
+ * Calculator
  * @author Andrey Shulgin (neonod404@gmail.com)
  * @version 1.0
  */
@@ -10,10 +11,20 @@ public class Calculator {
      * Сложение first и second.
      * @param first - первое число.
      * @param second - второе число.
+     * @return сумма
      */
-    public static void add(double first, double second) {
-        double result =  first + second;
-        System.out.println(first + " + " + second + " = " + result);
+    public double add(double first, double second) {
+        return first + second;
+    }
+
+    /**
+     * Сложение first и second.
+     * @param first - первое число.
+     * @param second - второе число.
+     * @param third - третье число.
+     */
+    public double add(double first, double second, double third) {
+        return add(first, add(second, third));
     }
 
     /** Деление first на second.
@@ -47,7 +58,6 @@ public class Calculator {
      * @param args - args.
      */
     public static void main(String[] args) {
-        add(1, 1);
         div(4, 2);
         multiply(2, 1);
         subtract(10, 5);
