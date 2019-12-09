@@ -7,8 +7,10 @@ public class PointTest {
 
     @Test
     public void distance() {
-        double expected = 13.34;
-        double out = Point.distance(0, 5, 13, 8);
+        double expected = 5.83;
+        Point pointFirst = new Point(0, 0);
+        Point pointSecond = new Point(5, 3);
+        double out = pointFirst.distance(pointSecond);
         Assert.assertEquals(expected, out, 0.01);
     }
 }
