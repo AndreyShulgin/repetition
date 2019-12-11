@@ -6,10 +6,18 @@ package ru.job4j.oop;
 public class Animal {
 
     /**
-     * Конструктор, который показывает очередность загрузки конструкторов при наследовании.
+     * Имя объекта.
      */
-    public Animal() {
-        super();
+    private String name;
+
+    /**
+     * Конструктор, который показывает очередность загрузки конструкторов при наследовании.
+     *
+     * @param name - имя
+     */
+    public Animal(String name) {
+        this.name = name;
         System.out.println("load animal");
     }
+
 }

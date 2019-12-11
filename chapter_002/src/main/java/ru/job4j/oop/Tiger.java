@@ -7,13 +7,15 @@ public class Tiger extends Predator {
 
     /**
      * Конструктор, который показывает очередность загрузки конструкторов при наследовании.
+     *
+     * @param name - имя
      */
-    public Tiger() {
-        super();
+    public Tiger(String name) {
+        super(name);
         System.out.println("load tiger");
     }
 
     public static void main(String[] args) {
-        Tiger tiger = new Tiger();
+        Tiger tiger = new Tiger("Mouse");
     }
 }
