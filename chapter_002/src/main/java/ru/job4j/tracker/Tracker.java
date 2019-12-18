@@ -78,6 +78,15 @@ public class Tracker {
     }
 
     /**
+     * Метод удаляет заявку из списка.
+     * @param id - ID заявки.
+     */
+    public void delete(String id) {
+        System.arraycopy(items, indexOf(id) + 1, items, indexOf(id), position - indexOf(id));
+        items[position--] = null;
+    }
+
+    /**
      * Метод генерирует уникальный ключ для заявки.
      * Так как у заявки нет уникальности полей, имени и описание. Для идентификации нам нужен уникальный ключ.
      * @return Уникальный ключ.
