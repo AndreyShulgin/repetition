@@ -60,13 +60,21 @@ public class Tracker {
      */
     public Item findById(String id) {
         Item result = null;
-        for (int index = 0; index < items.length; index++) {
-            if (items[index] != null && items[index].getId().equals(id)) {
-                result = items[index];
-                break;
-            }
+        if (indexOf(id) != -1) {
+            result = items[indexOf(id)];
         }
         return result;
+    }
+
+    /**
+     * Метод заменяет заявку, оставляя предыдущий ID
+     * @param id - id заявки
+     * @param item - заявка на которую нужно изменить
+     */
+    public void replace(String id, Item item) {
+        int index = indexOf(id);
+        item.setId(items[index].getId());
+        items[index] = item;
     }
 
     /**
@@ -77,5 +85,21 @@ public class Tracker {
     private String generateId() {
         Random rm = new Random();
         return String.valueOf(rm.nextLong() + System.currentTimeMillis());
+    }
+
+    /**
+     * Метод поиска индекса заявки в массиве по ID
+     * @param id - ключ
+     * @return - если есть заявка, то возращает ее номер в массиве, если нет, то -1.
+     */
+    private int indexOf(String id) {
+        int rsl = -1;
+        for (int index = 0; index < position; index++) {
+            if (items[index].getId().equals(id)) {
+                rsl = index;
+                break;
+            }
+        }
+        return rsl;
     }
 }
