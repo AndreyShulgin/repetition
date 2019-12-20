@@ -7,6 +7,11 @@ import java.util.Scanner;
  */
 public class StartUI {
 
+    /**
+     * Метод обеспечивает работу в меню трекера
+     * @param scanner - работа с входными данными
+     * @param tracker - объект трекера
+     */
     public void init(Scanner scanner, Tracker tracker) {
         boolean run = true;
         while (run) {
@@ -61,6 +66,9 @@ public class StartUI {
         }
     }
 
+    /**
+     * Метод отображения меню
+     */
     private void showMenu() {
         System.out.println("Menu.");
         System.out.println("0. Add new Item");
@@ -73,6 +81,10 @@ public class StartUI {
     }
 
 
+    /**
+     * Метод запуска программы
+     * @param args - args
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Tracker tracker = new Tracker();
