@@ -86,8 +86,12 @@ public class Tracker {
      * @param id - ID заявки.
      */
     public void delete(String id) {
-        System.arraycopy(items, indexOf(id) + 1, items, indexOf(id), position - indexOf(id));
-        items[position--] = null;
+        if (indexOf(id) != -1) {
+            System.arraycopy(items, indexOf(id) + 1, items, indexOf(id), position - indexOf(id));
+            items[position--] = null;
+        } else {
+            System.out.println("Item not found");
+        }
     }
 
     /**
