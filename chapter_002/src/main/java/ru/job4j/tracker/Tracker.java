@@ -77,7 +77,7 @@ public class Tracker {
             item.setId(items[index].getId());
             items[index] = item;
         } else {
-            System.out.println("Заявка не найдена");
+            System.out.println("Item not found");
         }
     }
 
@@ -86,8 +86,12 @@ public class Tracker {
      * @param id - ID заявки.
      */
     public void delete(String id) {
-        System.arraycopy(items, indexOf(id) + 1, items, indexOf(id), position - indexOf(id));
-        items[position--] = null;
+        if (indexOf(id) != -1) {
+            System.arraycopy(items, indexOf(id) + 1, items, indexOf(id), position - indexOf(id));
+            items[position--] = null;
+        } else {
+            System.out.println("Item not found");
+        }
     }
 
     /**
