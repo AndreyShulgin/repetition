@@ -26,10 +26,6 @@ public class User {
         return accountList;
     }
 
-    public void setAccountList(List<Account> accountList) {
-        this.accountList = accountList;
-    }
-
     public User(String passport, String name) {
         this.passport = passport;
         this.name = name;
@@ -39,16 +35,8 @@ public class User {
         return passport;
     }
 
-    public void setPassport(String passport) {
-        this.passport = passport;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override

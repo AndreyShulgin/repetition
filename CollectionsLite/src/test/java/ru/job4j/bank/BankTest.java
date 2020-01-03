@@ -122,9 +122,9 @@ public class BankTest {
     @Test
     public void whenTransferMoneyValue10ThenValue7() {
         Bank bank = new Bank();
-        User user1 = new User("Andrey", "1111");
+        User user1 = new User("1111", "Andrey");
         Account account1 = new Account(10, "req1");
-        User user2 = new User("Alex", "2222");
+        User user2 = new User("2222", "Alex");
         Account account2 = new Account(5, "req2");
         bank.addUser(user1);
         bank.addUser(user2);
@@ -137,9 +137,9 @@ public class BankTest {
     @Test
     public void whenTransferMoneyValue5ThenValue8() {
         Bank bank = new Bank();
-        User user1 = new User("Andrey", "1111");
+        User user1 = new User("1111", "Andrey");
         Account account1 = new Account(10, "req1");
-        User user2 = new User("Alex", "2222");
+        User user2 = new User("2222", "Alex");
         Account account2 = new Account(5, "req2");
         bank.addUser(user1);
         bank.addUser(user2);

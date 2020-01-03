@@ -16,7 +16,7 @@ public class Bank {
      * @param user - пользователь
      */
     public void addUser(User user) {
-
+        userAccounts.putIfAbsent(user, user.getAccountList());
     }
 
     /**
@@ -24,7 +24,7 @@ public class Bank {
      * @param user - пользователь
      */
     public void deleteUser(User user) {
-
+        userAccounts.remove(user);
     }
 
     /**
@@ -33,7 +33,11 @@ public class Bank {
      * @param account - новый счет
      */
     public void addAccountToUser(String passport, Account account) {
-
+        for (User user : userAccounts.keySet()) {
+            if (user.getPassport().equals(passport)) {
+                user.getAccountList().add(account);
+            }
+        }
     }
 
     /**
@@ -42,7 +46,11 @@ public class Bank {
      * @param account - счет который нужно удалить
      */
     public void deleteAccountFromUser(String passport, Account account) {
-
+        for (User user : userAccounts.keySet()) {
+            if (user.getPassport().equals(passport)) {
+                user.getAccountList().remove(account);
+            }
+        }
     }
 
     /**
@@ -51,7 +59,13 @@ public class Bank {
      * @return - список счетов
      */
     public List<Account> getUserAccounts(String passport) {
-        return null;
+        List<Account> result = null;
+        for (User user : userAccounts.keySet()) {
+            if (user.getPassport().equals(passport)) {
+                result = user.getAccountList();
+            }
+        }
+        return result;
     }
 
     /**
@@ -65,7 +79,34 @@ public class Bank {
      */
     public boolean transferMoney(String srcPassport, String srcRequisite,
                                  String destPassport, String dstRequisite, double amount) {
-        return false;
+        boolean result = false;
+        Account srcAccount = getAcc(srcPassport, srcRequisite);
+        Account destAccount = getAcc(destPassport, dstRequisite);
+        if (srcAccount != null && destAccount != null & srcAccount.getValue() >= amount) {
+            srcAccount.setValue(srcAccount.getValue() - amount);
+            destAccount.setValue(destAccount.getValue() + amount);
+            result = true;
+        }
+        return result;
     }
 
+    /**
+     * Поиск аккаунта по паспорту и реквизитам
+     * @param passport - паспорт
+     * @param requisite - реквизиты
+     * @return - если нет аккаунта вернуть null
+     */
+    private Account getAcc(String passport, String requisite) {
+        Account account = null;
+        for (User user : userAccounts.keySet()) {
+            if (user.getPassport().equals(passport)) {
+                for (Account acc : user.getAccountList()) {
+                    if (acc.getRequisites().equals(requisite)) {
+                        account = acc;
+                    }
+                }
+            }
+        }
+        return account;
+    }
 }
