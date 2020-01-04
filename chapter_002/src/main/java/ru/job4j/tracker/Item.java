@@ -3,7 +3,7 @@ package ru.job4j.tracker;
 /**
  * @author Andrey Shulgin (neonod404@gmail.com)
  */
-public class Item {
+public class Item implements Comparable<Item> {
     /**
      * Уникальный ID заявки.
      */
@@ -31,5 +31,11 @@ public class Item {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+
+    @Override
+    public int compareTo(Item o) {
+        return this.getName().compareTo(o.getName());
     }
 }
