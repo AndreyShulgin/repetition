@@ -3,6 +3,7 @@ package ru.job4j.tracker;
 import org.junit.Test;
 
 import java.util.Collections;
+import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -18,7 +19,7 @@ public class ItemTest {
         tracker.add(item0);
         tracker.add(item1);
         tracker.add(item2);
-        tracker.findAll().sort(Collections.reverseOrder());
+        tracker.findAll().sort(new ItemDescByName());
         assertThat(tracker.findAll().get(0), is(item1));
         assertThat(tracker.findAll().get(1), is(item0));
         assertThat(tracker.findAll().get(2), is(item2));
@@ -33,7 +34,7 @@ public class ItemTest {
         tracker.add(item0);
         tracker.add(item1);
         tracker.add(item2);
-        Collections.sort(tracker.findAll());
+        tracker.findAll().sort(new ItemSortByName());
         assertThat(tracker.findAll().get(0), is(item2));
         assertThat(tracker.findAll().get(1), is(item0));
         assertThat(tracker.findAll().get(2), is(item1));
