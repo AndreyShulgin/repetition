@@ -12,6 +12,7 @@
         <module>chapter_001</module>
         <module>chapter_002</module>
         <module>CollectionsLite</module>
+        <module>StreamAPI</module>
     </modules>
 
     <properties>
