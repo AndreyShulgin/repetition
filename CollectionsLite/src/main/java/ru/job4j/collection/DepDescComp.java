@@ -8,11 +8,14 @@ import java.util.Comparator;
 public class DepDescComp implements Comparator<String> {
     @Override
     public int compare(String o1, String o2) {
-        int result;
-        if (o1.charAt(1) == (o2.charAt(1))) {
-            result = o1.compareTo(o2);
-        } else {
-            result = o2.compareTo(o1);
+        int result = o2.compareTo(o1);
+        int length = Math.min(o1.length(), o2.length());
+        for (int index = 0; index < length; index++) {
+            result = Character.compare(o2.charAt(index), o1.charAt(index));
+            if (result != 0) {
+                result = o1.compareTo(o2);
+                break;
+            }
         }
         return result;
     }

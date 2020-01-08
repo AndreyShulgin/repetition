@@ -7,6 +7,11 @@ import java.util.*;
  */
 public class Departments {
 
+    /**
+     * Метод заполяет пропущенные депортаменты
+     * @param deps - список депортаментов
+     * @return - полный отсортированный список депортаментов
+     */
     public static List<String> fillGaps(List<String> deps) {
         HashSet<String> tmp = new HashSet<>();
         for (String value : deps) {
@@ -27,10 +32,18 @@ public class Departments {
         return rst;
     }
 
+    /**
+     * Метод сортирует возрастанию
+     * @param orgs - список
+     */
     public static void sortAsc(List<String> orgs) {
         Collections.sort(orgs);
     }
 
+    /**
+     * Метод сортирует по убыванию
+     * @param orgs - список
+     */
     public static void sortDesc(List<String> orgs) {
         orgs.sort(new DepDescComp());
     }
