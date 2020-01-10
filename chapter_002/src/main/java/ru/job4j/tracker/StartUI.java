@@ -1,11 +1,18 @@
 package ru.job4j.tracker;
 
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 /**
  * @author Andrey Shulgin (neonod404@gmail.com)
  */
 public class StartUI {
+
+    private final Consumer<String> output;
+
+    public StartUI(Consumer<String> output) {
+        this.output = output;
+    }
 
     /**
      * Метод обеспечивает работу в меню трекера
@@ -27,7 +34,7 @@ public class StartUI {
      * Метод отображения меню
      */
     private void showMenu(ArrayList<UserAction> actions) {
-        System.out.println("Menu.");
+        output.accept("Menu.");
         for (int index = 0; index < actions.size(); index++) {
             System.out.println(index + ". " + actions.get(index).name());
         }
@@ -50,6 +57,6 @@ public class StartUI {
         actions.add(new FindByIdAction());
         actions.add(new FindByNameAction());
         actions.add(new ExitAction());
-        new StartUI().init(validate, tracker, actions);
+        new StartUI(System.out::println).init(validate, tracker, actions);
     }
 }
