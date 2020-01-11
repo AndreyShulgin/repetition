@@ -10,11 +10,25 @@ public class Student {
      */
     private int score;
 
+    /**
+     * Имя студента
+     */
+    private String firstName;
+
     public Student(int score) {
         this.score = score;
     }
 
+    public Student(int score, String firstName) {
+        this.score = score;
+        this.firstName = firstName;
+    }
+
     public int getScore() {
         return score;
+    }
+
+    public String getFirstName() {
+        return firstName;
     }
 }
