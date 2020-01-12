@@ -33,11 +33,7 @@ public class Bank {
      * @param account - новый счет
      */
     public void addAccountToUser(String passport, Account account) {
-        for (User user : userAccounts.keySet()) {
-            if (user.getPassport().equals(passport)) {
-                user.getAccountList().add(account);
-            }
-        }
+        userAccounts.keySet().stream().filter(e -> e.getPassport().equals(passport)).findFirst().ifPresent(e -> e.getAccountList().add(account));
     }
 
     /**
@@ -46,11 +42,7 @@ public class Bank {
      * @param account - счет который нужно удалить
      */
     public void deleteAccountFromUser(String passport, Account account) {
-        for (User user : userAccounts.keySet()) {
-            if (user.getPassport().equals(passport)) {
-                user.getAccountList().remove(account);
-            }
-        }
+        userAccounts.keySet().stream().filter(e -> e.getPassport().equals(passport)).findFirst().ifPresent(rsl -> rsl.getAccountList().remove(account));
     }
 
     /**
@@ -60,10 +52,9 @@ public class Bank {
      */
     public List<Account> getUserAccounts(String passport) {
         List<Account> result = null;
-        for (User user : userAccounts.keySet()) {
-            if (user.getPassport().equals(passport)) {
-                result = user.getAccountList();
-            }
+        User rsl = userAccounts.keySet().stream().filter(e -> e.getPassport().equals(passport)).findFirst().orElse(null);
+        if (rsl != null) {
+            result = rsl.getAccountList();
         }
         return result;
     }
@@ -97,16 +88,10 @@ public class Bank {
      * @return - если нет аккаунта вернуть null
      */
     private Account getAcc(String passport, String requisite) {
-        Account account = null;
-        for (User user : userAccounts.keySet()) {
-            if (user.getPassport().equals(passport)) {
-                for (Account acc : user.getAccountList()) {
-                    if (acc.getRequisites().equals(requisite)) {
-                        account = acc;
-                    }
-                }
-            }
-        }
-        return account;
+        return userAccounts.keySet().stream()
+                .filter(e -> e.getPassport().equals(passport))
+                .flatMap(e -> e.getAccountList().stream())
+                .filter(e -> e.getRequisites().equals(requisite))
+                .findFirst().orElse(null);
     }
 }
