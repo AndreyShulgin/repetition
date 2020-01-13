@@ -5,10 +5,6 @@ package ru.job4j.ex;
  */
 public class Fact {
 
-    public static void main(String[] args) {
-        System.out.println(new Fact().calc(10));
-    }
-
     /**
      * Метод считает факториал числа
      * @param n - число
@@ -19,8 +15,8 @@ public class Fact {
             throw  new IllegalArgumentException("Значение должно быть больше 1.");
         }
         int rsl = 1;
-        for (int index = 1; index != n; index++) {
-            rsl += index;
+        for (int index = 1; index <= n; index++) {
+            rsl = rsl * index;
         }
         return rsl;
     }
