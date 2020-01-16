@@ -3,12 +3,22 @@ package ru.job4j.iterator;
 import java.util.Iterator;
 
 /**
+ * Итератор для двухмерного массива
  * @author Andrey Shulgin (neonod404@gmail.com)
  */
 public class IteratorMatrixArray implements Iterator {
 
+    /**
+     * Двухмерный массив
+     */
     private final int[][] values;
+    /**
+     * Индекс массива
+     */
     private int indexOut = 0;
+    /**
+     * Индекс массива
+     */
     private int indexIn = 0;
 
     public IteratorMatrixArray(final int[][] values) {
