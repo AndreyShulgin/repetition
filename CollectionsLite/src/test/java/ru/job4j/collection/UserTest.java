@@ -10,15 +10,6 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 public class UserTest {
-    @Test
-    public void whenAsc() {
-        User petr = new User("Petr", 32);
-        User ivan = new User("Ivan", 31);
-        Set<User> users = Set.of(petr, ivan);
-        Iterator<User> it = users.iterator();
-        assertThat(it.next(), is(ivan));
-        assertThat(it.next(), is(petr));
-    }
 
     @Test
     public void whenComparePertVSIvan() {
