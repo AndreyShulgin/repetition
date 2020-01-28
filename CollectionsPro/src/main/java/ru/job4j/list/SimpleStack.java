@@ -6,6 +6,7 @@ package ru.job4j.list;
 public class SimpleStack<T> {
 
     private SimpleLinkedList<T> simpleLinkedList = new SimpleLinkedList<>();
+    private int size;
 
 
     /**
@@ -13,7 +14,12 @@ public class SimpleStack<T> {
      * @return - удаленный объект
      */
     public T poll() {
-        return simpleLinkedList.removeFirst();
+        T result = null;
+        if (!isEmpty()) {
+            result = simpleLinkedList.removeFirst();
+            size--;
+        }
+        return result;
     }
 
     /**
@@ -22,5 +28,14 @@ public class SimpleStack<T> {
      */
     public void push(T value) {
         simpleLinkedList.add(value);
+        size++;
+    }
+
+    /**
+     * Метод проверят, что стек не пустой
+     * @return - true если стек пустой
+     */
+    public boolean isEmpty() {
+        return size == 0;
     }
 }
