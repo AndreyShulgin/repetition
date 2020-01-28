@@ -12,6 +12,10 @@ public class SimpleLinkedList<E> implements Iterable<E> {
     private Node<E> first;
     private int modCount;
 
+    /**
+     * Метод добавляет объект в начало связанного списка
+     * @param value - объект
+     */
     public void add(E value) {
         Node<E> newLink = new Node<>(value);
         newLink.next = this.first;
@@ -19,12 +23,28 @@ public class SimpleLinkedList<E> implements Iterable<E> {
         this.modCount++;
     }
 
+    /**
+     * Метод возвращает объект по позиции
+     * @param position - позиция
+     * @return - объект
+     */
     public E get(int position) {
         Node<E> result = this.first;
         for (int i = 0; i < position; i++) {
             result = result.next;
         }
         return result.data;
+    }
+
+    /**
+     * Метод удаляет из списка последний добавленный объект.
+     * @return - удаленный объект
+     */
+    public E removeFirst() {
+        var result = first.data;
+        first = first.next;
+        modCount++;
+        return result;
     }
 
     @Override
