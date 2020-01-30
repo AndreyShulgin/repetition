@@ -63,7 +63,7 @@ public class User {
         };
         User first = new User("Andrey", 0, calendar);
         User second = new User("Sergey", 1, calendar);
-        Map<User, String> users = new HashMap<>();
+        Map<User, Object> users = new HashMap<>();
         users.put(first, "Andrey");
         users.put(second, "Sergey");
         System.out.println(users);
