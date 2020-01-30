@@ -3,6 +3,7 @@ package ru.job4j.map;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author Andrey Shulgin (neonod404@gmail.com)
@@ -17,6 +18,11 @@ public class User {
         this.name = name;
         this.children = children;
         this.birthday = birthday;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, children, birthday);
     }
 
     public static void main(String[] args) {
@@ -62,10 +68,10 @@ public class User {
             }
         };
         User first = new User("Andrey", 0, calendar);
-        User second = new User("Sergey", 1, calendar);
+        User second = new User("Andrey", 0, calendar);
         Map<User, Object> users = new HashMap<>();
         users.put(first, "Andrey");
-        users.put(second, "Sergey");
+        users.put(second, "Andrey");
         System.out.println(users);
 
     }
