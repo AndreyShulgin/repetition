@@ -61,11 +61,12 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
      * @param value - значение
      * @return - возвращает false, если в карте же есть данный ключ.
      */
-    boolean insert(K key, V value) {
+    public boolean insert(K key, V value) {
         var result = true;
         var first = new Node<>(key, value);
         if (size >= simpleHashMap.length) {
-            simpleHashMap = Arrays.copyOf(simpleHashMap, simpleHashMap.length * 2);
+            size = 0;
+            simpleHashMap = increaseArray(simpleHashMap);
         }
         for (Node<K, V> kvNode : simpleHashMap) {
             if (kvNode != null && kvNode.key.equals(key)) {
@@ -82,11 +83,23 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
         return result;
     }
 
+    private Node<K, V>[] increaseArray(Node<K, V>[] before) {
+        Node<K, V>[] result = new Node[before.length * 2];
+        for (Node<K, V> kvNode : before) {
+            if (kvNode != null) {
+                var index = kvNode.hashCode() & (result.length - 1);
+                result[index] = kvNode;
+                size++;
+            }
+        }
+        return result;
+    }
+
     @Override
     public Iterator<K> iterator() {
         return new Iterator<K>() {
             int index;
-            int expectedModCount = modCount;
+            final int expectedModCount = modCount;
 
             @Override
             public boolean hasNext() {
