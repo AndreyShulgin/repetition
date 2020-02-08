@@ -20,6 +20,32 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
     }
 
     /**
+     * Определение хеша ключа
+     * @param key - ключ
+     * @return - хеш
+     */
+    private static int hash(Object key) {
+        int h;
+        if (key == null) {
+            h = 0;
+        } else {
+            h = key.hashCode();
+            h = h ^ (h >>> 16);
+        }
+        return h;
+    }
+
+    /**
+     * Метод определяет индекс в массиве по хешу
+     * @param hash - хеш ключа
+     * @return - индекс
+     */
+    private int indexFor(int hash) {
+            return hash & (simpleHashMap.length - 1);
+
+    }
+
+    /**
      * Метод удаляет из карты по ключу
      *
      * @param key - ключ
@@ -27,13 +53,13 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
      */
     public boolean delete(K key) {
         boolean result = false;
-        for (int index = 0; index < simpleHashMap.length; index++) {
-            if (simpleHashMap[index] != null && simpleHashMap[index].key.equals(key)) {
-                simpleHashMap[index] = null;
-                result = true;
-                modCount++;
-                size--;
-            }
+        int hash = hash(key);
+        int index = indexFor(hash);
+        if (simpleHashMap[index] != null && simpleHashMap[index].key.equals(key)) {
+            simpleHashMap[index] = null;
+            result = true;
+            modCount++;
+            size--;
         }
         return result;
     }
@@ -46,9 +72,12 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
      */
     public V get(K key) {
         V result = null;
-        for (Node<K, V> kvNode : simpleHashMap) {
-            if (kvNode != null && kvNode.key.equals(key)) {
-                result = kvNode.value;
+        int hash = hash(key);
+        int index = indexFor(hash);
+        Node<K, V> node = simpleHashMap[index];
+        if (node != null) {
+            if ((node.key == null && key == null) || (node.key != null && node.key.equals(key))) {
+                result = node.value;
             }
         }
         return result;
@@ -64,18 +93,16 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
     public boolean insert(K key, V value) {
         var result = true;
         var first = new Node<>(key, value);
+        int hash = hash(first.key);
+        int index = indexFor(hash);
         if (size >= simpleHashMap.length) {
             size = 0;
             simpleHashMap = increaseArray(simpleHashMap);
         }
-        for (Node<K, V> kvNode : simpleHashMap) {
-            if (kvNode != null && kvNode.key.equals(key)) {
-                result = false;
-                break;
-            }
+        if (simpleHashMap[index] != null && simpleHashMap[index].key.equals(key)) {
+            result = false;
         }
         if (result) {
-            var index = first.hashCode() & (simpleHashMap.length - 1);
             simpleHashMap[index] = first;
             modCount++;
             size++;
@@ -84,10 +111,11 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
     }
 
     private Node<K, V>[] increaseArray(Node<K, V>[] before) {
-        Node<K, V>[] result = new Node[before.length * 2];
+        Node<K, V>[] result = (Node<K, V>[]) new Node[before.length * 2];
         for (Node<K, V> kvNode : before) {
             if (kvNode != null) {
-                var index = kvNode.hashCode() & (result.length - 1);
+                var hash = hash(kvNode);
+                var index = indexFor(hash);
                 result[index] = kvNode;
                 size++;
             }

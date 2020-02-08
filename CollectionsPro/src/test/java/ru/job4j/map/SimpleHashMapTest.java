@@ -37,9 +37,9 @@ public class SimpleHashMapTest {
     @Test
     public void iterator() {
         Iterator<String> it = simpleHashMap.iterator();
-        assertThat(it.next(), is("Anna"));
-        assertThat(it.next(), is("Andrey"));
         assertThat(it.next(), is("Petr"));
+        assertThat(it.next(), is("Andrey"));
+        assertThat(it.next(), is("Anna"));
         assertThat(it.hasNext(), is(false));
 
     }
