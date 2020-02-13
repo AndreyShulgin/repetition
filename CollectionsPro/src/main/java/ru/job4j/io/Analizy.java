@@ -18,14 +18,12 @@ public class Analizy {
         try (BufferedReader reader = new BufferedReader(new FileReader(source))) {
             String line = reader.readLine();
             List<String> start = new ArrayList<>(100);
-            List<String> finish = new ArrayList<>(100);
             String[] first = null;
             String[] second;
             while (line != null) {
                 if (first != null && (line.contains("200") || line.contains("300"))) {
                     second = line.split(" ");
-                    start.add(first[1]);
-                    finish.add(second[1]);
+                    start.add(first[1] + ";" + second[1]);
                     first = null;
                 }
                 if ((line.contains("400") || line.contains("500")) && first == null) {
@@ -33,16 +31,16 @@ public class Analizy {
                 }
                 line = reader.readLine();
             }
-            writeTo(target, start, finish);
+            writeTo(target, start);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void writeTo(String target, List<String> start, List<String> finish) {
+    private void writeTo(String target, List<String> start) {
         try (PrintWriter out = new PrintWriter(new FileOutputStream(target))) {
-            for (int index = 0; index < start.size(); index++) {
-                out.println(start.get(index) + ";" + finish.get(index));
+            for (String s : start) {
+                out.println(s);
             }
         } catch (Exception e) {
             e.printStackTrace();
