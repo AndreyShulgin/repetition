@@ -14,6 +14,7 @@
         <module>CollectionsLite</module>
         <module>StreamAPI</module>
         <module>CollectionsPro</module>
+        <module>IO</module>
     </modules>
 
     <properties>
