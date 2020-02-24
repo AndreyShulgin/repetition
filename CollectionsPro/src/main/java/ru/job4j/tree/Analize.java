@@ -1,5 +1,6 @@
 package ru.job4j.tree;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -10,21 +11,24 @@ public class Analize {
 
     public Info diff(List<User> previous, List<User> current) {
         Info result = new Info();
-        for (User user : previous) {
-            for (int in = 0; in < current.size(); in++) {
-                if (user.equals(current.get(in))) {
-                    if (!user.name.equals(current.get(in).name)) {
-                        result.changed++;
-                    }
-                    current.remove(in);
-                    break;
-                }
-                if (in == current.size() - 1) {
-                    result.deleted++;
-                }
+        HashMap<Integer, User> before = listToMap(previous);
+        for (User user : current) {
+            if (before.get(user.id) == null) {
+                result.added++;
+            } else if (!before.get(user.id).name.equals(user.name)) {
+                result.changed++;
+                before.remove(user.id);
             }
         }
-        result.added = current.size();
+        result.deleted = before.size();
+        return result;
+    }
+
+    private HashMap<Integer, User> listToMap(List<User> users) {
+        HashMap<Integer, User> result = new HashMap<>();
+        for (User user : users) {
+            result.put(user.id, user);
+        }
         return result;
     }
 
